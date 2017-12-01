@@ -7,7 +7,7 @@ import App from './App'
 const Root = ({ store }) => (
   <Provider store={store}>
     <div>
-      <Route path="/:subreddit?" component={App} />
+      <Route path="/reddit-api-example/:subreddit?" component={App} />
     </div>
   </Provider>
 )
