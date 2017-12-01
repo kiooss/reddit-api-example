@@ -18,13 +18,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, selectedSubreddit, match: { params } } = this.props
-    if (params.subreddit && params.subreddit !== selectedSubreddit) {
-      dispatch(selectSubreddit(params.subreddit))
-      dispatch(fetchPostsIfNeeded(params.subreddit))
-    } else {
-      dispatch(fetchPostsIfNeeded(selectedSubreddit))
-    }
+    const { dispatch, selectedSubreddit } = this.props
+    dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
 
   componentDidUpdate(prevProps) {
@@ -36,7 +31,6 @@ class App extends Component {
 
   handleChange(nextSubreddit) {
     const { dispatch } = this.props
-    this.props.history.push(`/${nextSubreddit}`)
     dispatch(selectSubreddit(nextSubreddit))
     dispatch(fetchPostsIfNeeded(nextSubreddit))
   }
@@ -100,8 +94,6 @@ App.propTypes = {
   posts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
-  match: PropTypes.object,
-  history: PropTypes.object,
   errors: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 }
